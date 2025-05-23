@@ -38,7 +38,7 @@ github repo: [AstroViewSim](https://github.com/mengtianyoo/AstroViewSim)
    3. **反射—视线夹角** $\gamma$：
       反射向量 $\mathbf{r} = 2(\mathbf{s}\cdot\mathbf{n})\,\mathbf{n} - \mathbf{s}$
 
-      $ \cos\gamma = \frac{\mathbf{r}\cdot\mathbf{v}}{\|\mathbf{r}\|\|\mathbf{v}\|}.$
+      $\cos\gamma = \frac{\mathbf{r}\cdot\mathbf{v}}{\|\mathbf{r}\|\|\mathbf{v}\|}.$
 
       要求 $⁡\gamma \le \gamma_{\max}$（反射—视线夹角阈值，用以模拟镜面反射强度）。
 4. **实现思路**
