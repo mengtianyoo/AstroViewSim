@@ -1,4 +1,4 @@
-# 小行星探测覆盖性分析
+# 小行星探测覆盖性分析🔭
 
 author: gloomy
 
@@ -6,7 +6,7 @@ mail:mengtianyoo@gmail.com
 
 github repo: [AstroViewSim](https://github.com/mengtianyoo/AstroViewSim)
 
-## 流程大致是这样的：
+## 🧠算法流程：
 
 1. **建立坐标系**
 
@@ -48,25 +48,25 @@ github repo: [AstroViewSim](https://github.com/mengtianyoo/AstroViewSim)
 
 ---
 
-## 代办事项：
+## 📦代办事项：
 
 - [X] 读取OBJ模型--> 面片做标集合、面片法向量结合（+可视化展示）
 - [X] 判断相机可见区域输出集合（+可视化展示）
-- [X] 增加相机视角遮挡判断（ray casting），判断相机视角下，面片互相遮盖情况（+可视化对比）
+- [X] 增加相机视角遮挡判断（ray casting），**判断相机视角下，面片互相遮盖情况**（+可视化对比）
 - [X] 计算面片反射太阳光的反射光线（保留入射光夹角、反射光夹角）
-- [X] 增加光照遮挡关系判断（ray marching）
+- [X] **增加光照遮挡关系判断**（ray marching）
 - [X] 计算与光轴夹角（保留反射光线与光轴夹角）
 - [X] 可视化整体覆盖效果
 
 ---
 
-## 对比效果
+## ✅对比效果
 
-- 可视化
+- 可视化-Interactive 3D scatter plot of visible vs. invisible surface patches：
 
 ![1747984987316](image/README/1747984987316.png)
 
-- 打印样例：
+- 打印样例-Console summary of visibility statistics：
 
 ```txt
 === Visibility Analysis Summary ===
@@ -87,3 +87,56 @@ Patch Index  | Incidence Angle  |  Viewing Angle
     7553     |      44.40       |      45.01   
 --------------    ··········     -----------------
 ```
+
+----
+
+## 📊模型来源
+
+- [itokawa](https://data.darts.isas.jaxa.jp/pub/hayabusa/shape/gaskell/) (需要转换为obj模型，推荐meshlab等)
+
+- [Bennu](https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/bennu_OLA_v21_PTM_very-high.obj) 
+
+----
+
+## 📁 Dependencies
+
+```bash
+numpy
+trimesh
+matplotlib
+----------------
+pip install numpy trimesh matplotlib
+```
+
+----
+
+## 🎄目录树
+
+```bash
+AstroViewSim/
+│
+├── dead_code/                  # 已废弃的单个模块代码💩
+├── image/                      # 包含readme文件和一张小新星图片
+├── requirements.txt            # 依赖列表
+├── .gitignore                  # 排除obj大文件
+│
+├── main.py                     # 程序入口
+│   ├── MeshProcessor.py        # 负责处理3D网格数据的加载和处理
+│   ├── VisibilityStats.py      # 存储和展示可见性分析结果的数据类
+│   ├── GeometricVisibility.py  # 几何可见性 + occlusion
+│   ├── LightingAnalysis.py     # 光照判断 + 反射 + sun 遮挡
+│   ├── VisibilityAnalyzer.py   # 整体可见性分析的主类
+│   └── Visualizer.py           # 处理结果可视化
+│
+├── model/
+│   ├── bennu.obj           # 贝努模型
+│   └── itokawa.obj         # 丝川小行星模型
+│
+└── visibility_results/
+    └── visibility_analysis_0_0.txt        # 表示相机0°、太阳0°情况下的可见数据
+
+```
+
+## 📄 License
+
+MIT License © [gloomy]
