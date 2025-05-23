@@ -28,7 +28,7 @@ github repo: [AstroViewSim](https://github.com/mengtianyoo/AstroViewSim)
 
       $\cos\alpha = \frac{\mathbf{n}\cdot\mathbf{s}}{\|\mathbf{n}\|\|\mathbf{s}\|}.$
 
-      要求$⁡\alpha\le\alpha_{\max}$（光照角阈值）。
+      要求 $⁡\alpha \le \alpha_{\max}$（光照角阈值）。
    2. **视角** $\beta$：
       视向向量 $\mathbf{v} = \frac{\mathbf{c}-\mathbf{p}}{\|\mathbf{c}-\mathbf{p}\|}$
 
