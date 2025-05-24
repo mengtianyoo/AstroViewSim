@@ -20,27 +20,27 @@ class LightingAnalysis:
 
     @staticmethod
     def check_reflection_conditions(patch_positions: np.ndarray,
-                                  patch_normals: np.ndarray,
+                                  #patch_normals: np.ndarray,
                                   camera_pos: np.ndarray,
                                   sun_direction: np.ndarray,
-                                  min_reflection_angle_deg: float = 30.0) -> np.ndarray:
+                                  max_angle_deg: float = 30.0) -> np.ndarray:
         """Check if reflection conditions are met for specular reflection."""
         view_directions = camera_pos[None, :] - patch_positions
         view_directions = view_directions / np.linalg.norm(view_directions, axis=1, keepdims=True)
         
-        # Calculate reflection direction: R = 2 * (N · L) * N - L
-        dot_nl = np.dot(patch_normals, sun_direction)
-        reflection_directions = (2 * dot_nl[:, None] * patch_normals - 
-                               sun_direction[None, :])
-        reflection_directions = (reflection_directions / 
-                               np.linalg.norm(reflection_directions, axis=1, keepdims=True))
+        # # Calculate reflection direction: R = 2 * (N · L) * N - L
+        # dot_nl = np.dot(patch_normals, sun_direction)
+        # reflection_directions = (2 * dot_nl[:, None] * patch_normals - 
+        #                        sun_direction[None, :])
+        # reflection_directions = (reflection_directions / 
+        #                        np.linalg.norm(reflection_directions, axis=1, keepdims=True))
+        sun_direction_broadcast = sun_direction[None, :].repeat(len(view_directions), axis=0)
+        dot_product = np.sum(view_directions * sun_direction_broadcast, axis=1)
+        angles = np.arccos(np.clip(dot_product, -1.0, 1.0))
+        angles_deg = np.rad2deg(angles)
+        good_angles = angles_deg <= max_angle_deg
 
-        dot_rv = np.einsum('ij,ij->i', reflection_directions, view_directions)
-        
-        cos_max_angle = np.cos(np.deg2rad(min_reflection_angle_deg))
-        good_reflection = dot_rv >= cos_max_angle
-        
-        return good_reflection
+        return good_angles
 
     @staticmethod
     def filter_sun_occluded(mesh: trimesh.Trimesh,

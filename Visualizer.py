@@ -14,24 +14,20 @@ class Visualizer:
         fig = plt.figure(figsize=figsize)
         ax = fig.add_subplot(111, projection='3d')
 
-        # Plot invisible patches in gray
         ax.scatter(patch_positions[~visibility_mask, 0],
                   patch_positions[~visibility_mask, 1],
                   patch_positions[~visibility_mask, 2],
                   s=1, alpha=0.2, color='gray', label='Not visible')
-        
-        # Plot visible patches in red
+
         ax.scatter(patch_positions[visibility_mask, 0],
                   patch_positions[visibility_mask, 1],
                   patch_positions[visibility_mask, 2],
                   s=2, alpha=0.8, color='red', label='Visible')
-        
-        # Plot camera position if provided
+
         if camera_pos is not None:
             ax.scatter([camera_pos[0]], [camera_pos[1]], [camera_pos[2]],
                       color='blue', s=50, label='Camera')
 
-        # Set equal aspect ratio
         Visualizer._set_axes_equal(ax, patch_positions)
         
         ax.set_xlabel('X')

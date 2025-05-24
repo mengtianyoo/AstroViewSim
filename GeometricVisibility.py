@@ -18,7 +18,6 @@ class GeometricVisibility:
         if target is None:
             target = np.zeros(3)
             
-        # Build camera coordinate system
         z_cam = (target - camera_pos)
         z_cam = z_cam / np.linalg.norm(z_cam)
         world_up = np.array([0, 0, 1], dtype=float)
@@ -29,20 +28,17 @@ class GeometricVisibility:
         view_vectors = patch_positions - camera_pos[None, :]
         z_coords = view_vectors.dot(z_cam)
         
-        # Check if patches are in front of camera
         in_front = z_coords > 0
 
-        # Check if patches face the camera
         view_distances = np.linalg.norm(view_vectors, axis=1, keepdims=True)
         view_directions = view_vectors / view_distances
         dot_products = np.einsum('ij,ij->i', patch_normals, view_directions)
         facing_camera = dot_products < 0
         
-        # Check angle constraint
+
         cos_max_angle = np.cos(np.deg2rad(max_angle_deg))
         good_viewing_angle = dot_products <= -cos_max_angle
 
-        # Check field of view constraints
         x_coords = view_vectors.dot(x_cam)
         y_coords = view_vectors.dot(y_cam)
         
@@ -84,7 +80,6 @@ class GeometricVisibility:
         ray_distances = np.linalg.norm(ray_directions, axis=1)
         ray_directions = ray_directions / ray_distances[:, None]
         
-        # Get all ray-mesh intersections
         locations, index_ray, index_tri = mesh.ray.intersects_location(
             ray_origins=ray_origins,
             ray_directions=ray_directions
@@ -104,7 +99,6 @@ class GeometricVisibility:
             ray_intersect_distances = intersect_distances[ray_mask]
             target_distance = ray_distances[i]
             
-            # Check for closer intersections (with tolerance)
             tolerance = target_distance * 1e-6 + 1e-8
             closer_intersections = ray_intersect_distances < (target_distance - tolerance)
             

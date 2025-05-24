@@ -23,25 +23,25 @@ class VisibilityAnalyzer:
                          fov_y_deg: float = 2.0,
                          max_viewing_angle_deg: float = 60.0,
                          max_sun_angle_deg: float = 60.0,
-                         min_reflection_angle_deg: float = 30.0) -> Tuple[np.ndarray, VisibilityStats]:
+                         max_reflection_angle_deg: float = 30.0) -> Tuple[np.ndarray, VisibilityStats]:
         """
         Comprehensive visibility analysis considering geometry and lighting.
         """
         if target is None:
             target = np.zeros(3)
             
-        # Step 1: Geometric visibility
+        # Geometric visibility
         geometric_visible = GeometricVisibility.check_fov_visibility(
             self.patch_positions, self.patch_normals, camera_pos, target,
             fov_x_deg, fov_y_deg, max_viewing_angle_deg
         )
         
-        # Step 2: Occlusion filtering
+        # Occlusion filtering
         unoccluded_mask = GeometricVisibility.filter_occluded_patches(
             self.mesh, self.patch_positions, camera_pos, geometric_visible
         )
         
-        # Step 3: Lighting analysis on geometrically visible patches
+        # Lighting analysis on geometrically visible patches
         candidate_indices = np.where(unoccluded_mask)[0]
         if len(candidate_indices) == 0:
             empty_stats = VisibilityStats(0, 0, 0, 0, 0, len(self.patch_positions))
@@ -56,8 +56,8 @@ class VisibilityAnalyzer:
         )
         
         reflection_good = LightingAnalysis.check_reflection_conditions(
-            candidate_positions, candidate_normals, camera_pos, 
-            sun_direction, min_reflection_angle_deg
+            candidate_positions, camera_pos, 
+            sun_direction, max_reflection_angle_deg
         )
         
         # Check sun occlusion

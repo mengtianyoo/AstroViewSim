@@ -42,7 +42,7 @@ def main():
         fov_y_deg=2.0,
         max_viewing_angle_deg=60.0,
         max_sun_angle_deg=90.0,
-        min_reflection_angle_deg=100.0
+        max_reflection_angle_deg=100.0
     )
     
     output_dir = "visibility_results"

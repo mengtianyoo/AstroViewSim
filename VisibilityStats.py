@@ -34,7 +34,7 @@ class VisibilityStats:
             f.write(f"Final visible: {self.final_visible} "
                 f"({self.final_visible/self.total_patches*100:.1f}% of total)\n")
             
-            # 新增：打印详细信息
+            # 打印详细信息
             if self.final_visible > 0:
                 f.write("\n=== Detailed Visibility Information ===\n")
                 f.write(f"{'Patch Index':^12} | {'Incidence Angle':^16} | {'Viewing Angle':^16}\n")
