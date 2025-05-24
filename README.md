@@ -57,6 +57,9 @@ github repo: [AstroViewSim](https://github.com/mengtianyoo/AstroViewSim)
 - [X] **增加光照遮挡关系判断**（ray marching）
 - [X] 计算与光轴夹角（保留反射光线与光轴夹角）
 - [X] 可视化整体覆盖效果
+- [X] 增加是否运行中显示图像逻辑
+- [X] 完善数据保存逻辑
+- [ ] 
 
 ---
 
@@ -88,15 +91,14 @@ Patch Index  | Incidence Angle  |  Viewing Angle
 --------------    ··········     -----------------
 ```
 
-----
+---
 
 ## 📊模型来源
 
 - [itokawa](https://data.darts.isas.jaxa.jp/pub/hayabusa/shape/gaskell/) (需要转换为obj模型，推荐meshlab等)
+- [Bennu](https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/bennu_OLA_v21_PTM_very-high.obj)
 
-- [Bennu](https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/bennu_OLA_v21_PTM_very-high.obj) 
-
-----
+---
 
 ## 📁 Dependencies
 
@@ -108,7 +110,7 @@ matplotlib
 pip install numpy trimesh matplotlib
 ```
 
-----
+---
 
 ## 🎄目录树
 
@@ -133,7 +135,8 @@ AstroViewSim/
 │   └── itokawa.obj         # 丝川小行星模型
 │
 └── visibility_results/
-    └── visibility_analysis_0_0.txt        # 表示相机0°、太阳0°情况下的可见数据
+    └── sun_angle_000/
+        └── visibility_analysis_angle_000.txt        # 表示相机0°、太阳0°情况下的可见数据
 
 ```
 

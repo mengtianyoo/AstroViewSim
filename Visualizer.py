@@ -9,7 +9,9 @@ class Visualizer:
     def plot_visibility_results(patch_positions: np.ndarray,
                               visibility_mask: np.ndarray,
                               camera_pos: np.ndarray = None,
-                              figsize: Tuple[int, int] = (16, 8)):
+                              figsize: Tuple[int, int] = (16, 8),
+                              isshow: bool = True,
+                              save_path: str = None):
         """Plot visibility analysis results in 3D."""
         fig = plt.figure(figsize=figsize)
         ax = fig.add_subplot(111, projection='3d')
@@ -35,7 +37,9 @@ class Visualizer:
         ax.set_zlabel('Z')
         ax.legend()
         plt.tight_layout()
-        plt.show()
+        if isshow:
+            plt.show()
+        plt.savefig(save_path, dpi=300)
     
     @staticmethod
     def _set_axes_equal(ax, positions: np.ndarray):
