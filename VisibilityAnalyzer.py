@@ -44,7 +44,7 @@ class VisibilityAnalyzer:
         # Lighting analysis on geometrically visible patches
         candidate_indices = np.where(unoccluded_mask)[0]
         if len(candidate_indices) == 0:
-            empty_stats = VisibilityStats(0, 0, 0, 0, 0, len(self.patch_positions))
+            empty_stats = VisibilityStats(0, 0, 0, 0, 0, len(self.patch_positions), 0.0, 0.0)
             return np.zeros_like(geometric_visible), empty_stats
             
         candidate_positions = self.patch_positions[candidate_indices]
@@ -97,6 +97,8 @@ class VisibilityAnalyzer:
             light_unoccluded=np.sum(light_unoccluded),
             final_visible=np.sum(final_visible_mask),
             total_patches=len(self.patch_positions),
+            visible_area=np.sum(self.mesh.area_faces[final_visible_mask]),
+            total_area=self.mesh.area,
             visible_indices=visible_indices,
             incidence_angles=incidence_angles,
             viewing_angles=viewing_angles

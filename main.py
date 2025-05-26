@@ -113,22 +113,36 @@ def main():
         )
 
     print("\nGenerating combined results...")
+    #--------- base on the number of the visible patches
     visible_patches = np.sum(combined_visibility_mask)
     total_patches = len(patch_positions)
-    coverage_percentage = (visible_patches / total_patches) * 100
+    num_coverage_percentage = (visible_patches / total_patches) * 100
+    #--------- base on the area of the visible patches
+    visible_area = np.sum(mesh.area_faces[combined_visibility_mask])
+    total_area = mesh.area
+    area_coverage_percentage = (visible_area / total_area) * 100
+
+
+
+
     
-    combined_output_dir = f"visibility_results/sun_angle_{beta:03d}"
-    os.makedirs(combined_output_dir, exist_ok=True)
-    with open(os.path.join(combined_output_dir, "combined_stats.txt"), "w") as f:
+    # combined_output_dir = f"visibility_results/sun_angle_{beta:03d}"
+    # os.makedirs(combined_output_dir, exist_ok=True)
+    with open(os.path.join(output_dir, "combined_stats.txt"), "w") as f:
         f.write(f"Total patches: {total_patches}\n")
         f.write(f"Visible patches from all angles: {visible_patches}\n")
-        f.write(f"Coverage percentage: {coverage_percentage:.2f}%\n")
+        f.write(f"Coverage percentage: {num_coverage_percentage:.2f}%\n")
+        f.write(f"Total area: {total_area:.2f}\n")
+        f.write(f"Visible area: {visible_area:.2f}\n")
+        f.write(f"Area coverage percentage: {area_coverage_percentage:.2f}%\n")
+
     
     print("\nGenerating combined visualization...")
-    Visualizer.plot_visibility_results(
-        patch_positions, combined_visibility_mask, camera_pos, isshow=False,
-        save_path=os.path.join(combined_output_dir, "combined_visibility_plot.png")
-    )
+    Visualizer.export_ply(mesh, combined_visibility_mask, output_dir)
+    # Visualizer.plot_visibility_results(
+    #     patch_positions, combined_visibility_mask, camera_pos, isshow=False,
+    #     save_path=os.path.join(output_dir, "combined_visibility_plot.png")
+    # )
     
     print(f"\nAll results have been saved to the visibility_results directory")
 

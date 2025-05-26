@@ -5,6 +5,7 @@ Light illuminated: 5567 (83.4% of geometric)
 Reflection conditions met: 6676 (100.0% of geometric)
 Light unoccluded: 5567 (83.4% of geometric)
 Final visible: 5567 (11.3% of total)
+Visible area: 351.06 (9.7% of total area)
 
 === Detailed Visibility Information ===
 Patch Index  | Incidence Angle  |  Viewing Angle  

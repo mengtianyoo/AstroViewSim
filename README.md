@@ -59,13 +59,17 @@ github repo: [AstroViewSim](https://github.com/mengtianyoo/AstroViewSim)
 - [X] 可视化整体覆盖效果
 - [X] 增加是否运行中显示图像逻辑
 - [X] 完善数据保存逻辑
-- [ ] 
+- [X] 增加面积覆盖度计算
+- [ ] 视角摆动，上下浮动15°（改变光轴）
+- [ ] 计算速度极慢，需要优化速度，初步考虑并行计算（没思路）
+- [ ] 合并不同角度可见面片时的取舍问题（待解决）
+- [X] 增加3D模型文件可视化（ply）
 
 ---
 
-## ✅对比效果
+## ✅探测限制对比效果
 
-- 可视化-Interactive 3D scatter plot of visible vs. invisible surface patches：
+- 可视化(单张)-Interactive 3D scatter plot of visible vs. invisible surface patches：
 
 ![1747984987316](image/README/1747984987316.png)
 
@@ -90,6 +94,10 @@ Patch Index  | Incidence Angle  |  Viewing Angle
     7553     |      44.40       |      45.01   
 --------------    ··········     -----------------
 ```
+
+- 合并所有角度后，3D模型可视化效果：
+
+  ![1748270732115](image/README/1748270732115.png)
 
 ---
 
@@ -136,6 +144,8 @@ AstroViewSim/
 │
 └── visibility_results/
     └── sun_angle_000/
+        ├── combined_stats.txt                       # 整合覆盖情况分析（未整合面片具体角度，需要商量）
+        ├── visibility_colored_meshr.ply             # 导出可交互的ply3D模型
         └── visibility_analysis_angle_000.txt        # 表示相机0°、太阳0°情况下的可见数据
 
 ```

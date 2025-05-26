@@ -5,15 +5,32 @@ from dataclasses import dataclass
 @dataclass
 class VisibilityStats:
     """Data class to hold visibility analysis statistics."""
-    geometric_visible: int
-    light_illuminated: int
-    reflection_good: int
-    light_unoccluded: int
-    final_visible: int
-    total_patches: int
-    visible_indices: np.ndarray
-    incidence_angles: np.ndarray
-    viewing_angles: np.ndarray
+    def __init__(self,
+                    geometric_visible: int,
+                    light_illuminated: int,
+                    reflection_good: int,
+                    light_unoccluded: int,
+                    final_visible: int,
+                    visible_indices: np.ndarray,
+                    incidence_angles: np.ndarray,
+                    viewing_angles: np.ndarray,
+                    total_patches: int = 0,
+                    visible_area: float = 0.0,
+                    total_area: float = 0.0):
+        self.geometric_visible = geometric_visible
+        self.light_illuminated = light_illuminated
+        self.reflection_good = reflection_good
+        self.light_unoccluded = light_unoccluded
+        self.final_visible = final_visible
+        self.visible_indices = visible_indices
+        self.incidence_angles = incidence_angles
+        self.viewing_angles = viewing_angles
+        self.total_patches = total_patches
+        self.visible_area = visible_area
+        self.total_area = total_area
+
+
+
     
     def print_summary(self, output_file: str = "visibility_results.txt"):
         with open(output_file, 'w') as f:
@@ -33,7 +50,8 @@ class VisibilityStats:
             
             f.write(f"Final visible: {self.final_visible} "
                 f"({self.final_visible/self.total_patches*100:.1f}% of total)\n")
-            
+            f.write(f"Visible area: {self.visible_area:.2f} "
+                f"({self.visible_area/self.total_area*100:.1f}% of total area)\n")
             # 打印详细信息
             if self.final_visible > 0:
                 f.write("\n=== Detailed Visibility Information ===\n")
