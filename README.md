@@ -81,18 +81,20 @@ github repo: [AstroViewSim](https://github.com/mengtianyoo/AstroViewSim)
 Total patches: 49152
 Geometric visible: 3109 (6.3%)
 Light illuminated: 2947 (94.8% of geometric)
-Reflection conditions met: 1389 (44.7% of geometric)
-Light unoccluded: 1389 (44.7% of geometric)
-Final visible: 1389 (2.8% of total)
+Reflection conditions met: 2947 (94.8% of geometric)
+Light unoccluded: 2947 (94.8% of geometric)
+Final visible: 2947 (6.0% of total)
+Visible area: 344.80 (9.5% of total area)
 
 === Detailed Visibility Information ===
 Patch Index  | Incidence Angle  |  Viewing Angle  
 -------------+------------------+-----------------
+    7300     |      58.76       |      59.78  
     7424     |      45.54       |      46.40  
-    7435     |      47.63       |      48.66  
-    7436     |      47.49       |      48.53  
-    7552     |      31.57       |      32.33  
-    7553     |      44.40       |      45.01   
+    7425     |      57.40       |      58.43  
+    7427     |      58.15       |      59.06  
+    7428     |      54.02       |      55.00  
+    7429     |      52.56       |      53.52     
 --------------    ··········     -----------------
 
 *********  combined_stats.txt  **********
