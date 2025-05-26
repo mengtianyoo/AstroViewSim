@@ -76,6 +76,7 @@ github repo: [AstroViewSim](https://github.com/mengtianyoo/AstroViewSim)
 - 打印样例-Console summary of visibility statistics：
 
 ```txt
+*********  visibility_analysis_angle_000.txt  **********
 === Visibility Analysis Summary ===
 Total patches: 49152
 Geometric visible: 3109 (6.3%)
@@ -93,6 +94,15 @@ Patch Index  | Incidence Angle  |  Viewing Angle
     7552     |      31.57       |      32.33  
     7553     |      44.40       |      45.01   
 --------------    ··········     -----------------
+
+*********  combined_stats.txt  **********
+Total patches: 49152
+Visible patches from all angles: 17359
+Coverage percentage: 35.32%
+Total area: 3637.13
+Visible area: 1327.63
+Area coverage percentage: 36.50%
+
 ```
 
 - 合并所有角度后，3D模型可视化效果：
