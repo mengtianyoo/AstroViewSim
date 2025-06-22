@@ -46,24 +46,20 @@ class Visualizer:
         plt.close(fig)
 
     def export_ply(mesh: trimesh.Trimesh,
-                   combined_visibility_mask: np.ndarray,
-                   output_dir: str):
+                   visibility_mask: np.ndarray,
+                   output_dir: str,
+                   filename: str,
+                   isshow: bool = True):
         colored_mesh = copy.deepcopy(mesh)
-    
-        # 设置颜色数组 (RGBA格式)
-        colors = np.ones((len(mesh.faces), 4))  # 默认全白色
-        
-        # 设置可见面片为红色 (RGB: 1,0,0)
-        colors[combined_visibility_mask] = [1.0, 0.0, 0.0, 1.0]  # 红色
-        # 设置不可见面片为灰色 (RGB: 0.7,0.7,0.7)
-        colors[~combined_visibility_mask] = [0.7, 0.7, 0.7, 1.0]  # 灰色
-        
-        # 将颜色赋值给网格
+        colors = np.ones((len(mesh.faces), 4))
+        colors[visibility_mask] = [1.0, 0.0, 0.0, 1.0]
+        colors[~visibility_mask] = [0.7, 0.7, 0.7, 1.0]
         colored_mesh.visual.face_colors = colors
-        
-        # 保存为PLY格式
-        output_mesh_path = os.path.join(output_dir, "visibility_colored_mesh.ply")
+
+        output_mesh_path = os.path.join(output_dir, filename)
         colored_mesh.export(output_mesh_path, file_type='ply')
+        if isshow:
+            colored_mesh.show()
 
     
     @staticmethod

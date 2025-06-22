@@ -30,18 +30,15 @@ class VisibilityAnalyzer:
         if target is None:
             target = np.zeros(3)
             
-        # Geometric visibility
         geometric_visible = GeometricVisibility.check_fov_visibility(
             self.patch_positions, self.patch_normals, camera_pos, target,
             fov_x_deg, fov_y_deg, max_viewing_angle_deg
         )
         
-        # Occlusion filtering
         unoccluded_mask = GeometricVisibility.filter_occluded_patches(
             self.mesh, self.patch_positions, camera_pos, geometric_visible
         )
         
-        # Lighting analysis on geometrically visible patches
         candidate_indices = np.where(unoccluded_mask)[0]
         if len(candidate_indices) == 0:
             empty_stats = VisibilityStats(0, 0, 0, 0, 0, len(self.patch_positions), 0.0, 0.0)
@@ -50,7 +47,6 @@ class VisibilityAnalyzer:
         candidate_positions = self.patch_positions[candidate_indices]
         candidate_normals = self.patch_normals[candidate_indices]
         
-        # Check lighting conditions
         light_illuminated = LightingAnalysis.check_sun_illumination(
             candidate_normals, sun_direction, max_sun_angle_deg
         )
@@ -60,16 +56,13 @@ class VisibilityAnalyzer:
             sun_direction, max_reflection_angle_deg
         )
         
-        # Check sun occlusion
         lighting_candidates = light_illuminated & reflection_good
         light_unoccluded = LightingAnalysis.filter_sun_occluded(
             self.mesh, candidate_positions, lighting_candidates, sun_direction
         )
         
-        # Combine all conditions
         final_lighting_mask = light_illuminated & reflection_good & light_unoccluded
-        
-        # Create final visibility mask
+   
         final_visible_mask = np.zeros_like(geometric_visible)
         final_visible_mask[candidate_indices] = final_lighting_mask
 
@@ -89,7 +82,7 @@ class VisibilityAnalyzer:
             visible_indices = np.array([], dtype=int)
             incidence_angles = np.array([], dtype=float)
             viewing_angles = np.array([], dtype=float)
-        # Create statistics
+
         stats = VisibilityStats(
             geometric_visible=np.sum(geometric_visible),
             light_illuminated=np.sum(light_illuminated),

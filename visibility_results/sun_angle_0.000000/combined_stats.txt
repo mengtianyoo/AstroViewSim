@@ -1,0 +1,6 @@
+Total patches: 49152
+Visible patches from all angles: 30993
+Coverage percentage: 63.06%
+Total area: 3637.13
+Visible area: 2399.33
+Area coverage percentage: 65.97%
