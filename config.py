@@ -24,6 +24,14 @@ class VisibilityConfig:
     MAX_VIEWING_ANGLE_DEG = 60.0  # 最大视角
     MAX_SUN_ANGLE_DEG = 90.0  # 最大太阳角
     MAX_REFLECTION_ANGLE_DEG = 100.0  # 最大反射角
-    
+
     # 输出目录
     OUTPUT_BASE_DIR = "visibility_results"
+
+    # 输出控制
+    SAVE_INDIVIDUAL_PLY = False  # 是否保存每个角度的PLY
+    SAVE_PLOTS = False  # 是否保存可视化图片
+
+    MAX_VIEWING_ANGLE_DEG = 60.0
+    MAX_SUN_ANGLE_DEG = 90.0
+    MAX_REFLECTION_ANGLE_DEG = 100.0

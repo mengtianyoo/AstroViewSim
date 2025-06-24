@@ -98,3 +98,4 @@ class VisibilityAnalyzer:
         )
         
         return final_visible_mask, stats
+    
