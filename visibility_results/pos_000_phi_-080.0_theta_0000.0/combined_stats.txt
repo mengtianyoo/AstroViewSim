@@ -2,8 +2,8 @@ Camera Position: phi=-80.0бу, theta=0.0бу
 Sun Direction: phi=10.0бу, theta=0.0бу
 Beta angle (camera_phi - sun_phi): -90.0бу
 Total patches: 196608
-Visible patches from all rotations: 25599
-Patch coverage percentage: 13.02%
+Visible patches: 25599
+Patch coverage: 13.02%
 Total area: 7916.11
 Visible area: 982.21
-Area coverage percentage: 12.41%
+Area coverage: 12.41%

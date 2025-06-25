@@ -1,0 +1,22 @@
+# GPU加速版本的依赖包
+# 基础依赖
+numpy>=1.21.0
+trimesh>=3.9.0
+matplotlib>=3.5.0
+
+# GPU加速依赖 (根据您的CUDA版本选择一个)
+# CUDA 11.x
+cupy-cuda11x>=11.0.0
+
+# CUDA 12.x (如果您使用CUDA 12)
+# cupy-cuda12x>=12.0.0
+
+# 或者使用通用版本 (如果上述版本不兼容)
+# cupy>=11.0.0
+
+# OpenCL替代方案 (如果没有NVIDIA GPU)
+# pyopencl>=2022.1
+
+# 可选的额外加速库
+# numba>=0.56.0  # JIT编译加速
+# scipy>=1.7.0   # 科学计算库

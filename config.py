@@ -35,3 +35,12 @@ class VisibilityConfig:
     MAX_VIEWING_ANGLE_DEG = 60.0
     MAX_SUN_ANGLE_DEG = 90.0
     MAX_REFLECTION_ANGLE_DEG = 100.0
+
+    # GPU加速设置
+    USE_GPU_ACCELERATION = True  # 是否启用GPU加速
+    GPU_BATCH_SIZE = 36  # GPU批处理大小（旋转角度数量）
+    GPU_MEMORY_LIMIT_GB = 8  # GPU内存限制（GB）
+    
+    # 性能优化设置
+    ENABLE_MEMORY_OPTIMIZATION = True  # 启用内存优化
+    PARALLEL_CAMERA_POSITIONS = False  # 是否并行处理相机位置（需要更多GPU内存）

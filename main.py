@@ -116,7 +116,7 @@ from PosGen import PosGen
 
 def main():
     """Main execution function demonstrating usage."""
-    file_path = cfg.MODEL_PATH
+    file_path = cfg.MODEL_PATH   
     camera_distance = cfg.CAMERA_DISTANCE
     sun_theta = cfg.SUN_theta_ANGLE
     sun_phi = cfg.SUN_phi_ANGLE
