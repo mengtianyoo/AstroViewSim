@@ -1,6 +1,6 @@
 === Visibility Analysis Summary ===
 Total patches: 49152
-Geometric visible: 4480 (9.1%)
+Geometric visible: 2969 (6.0%)
 Light illuminated: 0 (0.0% of geometric)
 Reflection conditions met: 0 (0.0% of geometric)
 Light unoccluded: 0 (0.0% of geometric)
