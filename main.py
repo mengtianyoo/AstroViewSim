@@ -32,18 +32,19 @@ def main():
         np.cos(np.deg2rad(camera_theta))
     ])
 
-    sun_direction = np.array([
+    base_sun_direction = np.array([
         np.sin(np.deg2rad(sun_theta)) * np.cos(np.deg2rad(sun_phi)),
         np.sin(np.deg2rad(sun_theta)) * np.sin(np.deg2rad(sun_phi)),
         np.cos(np.deg2rad(sun_theta))
     ])
-    sun_direction = sun_direction / np.linalg.norm(sun_direction)
+    base_sun_direction = base_sun_direction / np.linalg.norm(base_sun_direction)
     
     analyzer = VisibilityAnalyzer(mesh, patch_positions, patch_normals)
     
     combined_visibility_mask = np.zeros_like(patch_positions[:,0], dtype=bool)
     
     for i in range(37):  # 0° to 360° in 10°
+
         theta = i * 10
         print(f"\nProcessing camera angle: {theta}°")
 
@@ -58,17 +59,13 @@ def main():
         ])
 
         camera_pos = rotation_matrix @ base_camera_pos
-        sun_direction_base = rotation_matrix @ sun_direction
-
-        camera_pos = np.array([
-            camera_distance * np.cos(np.deg2rad(theta)), 
-            camera_distance * np.sin(np.deg2rad(theta)), 
-            0.0
-        ])
-        
+        sun_direction = rotation_matrix @ base_sun_direction
+        print(f"Initial camera position: {camera_pos}")
+        print(f"Sun direction: {sun_direction}")
+        print(f"Dot product (should be negative): {np.dot(camera_pos/np.linalg.norm(camera_pos), sun_direction)}")
         visibility_mask, stats = analyzer.analyze_visibility(
             camera_pos=camera_pos,
-            sun_direction=sun_direction_base,
+            sun_direction=sun_direction,
             fov_x_deg=cfg.FOV_X_DEG,
             fov_y_deg=cfg.FOV_Y_DEG,
             max_viewing_angle_deg=cfg.MAX_VIEWING_ANGLE_DEG,
@@ -78,14 +75,15 @@ def main():
 
         combined_visibility_mask = combined_visibility_mask | visibility_mask
 
-        output_dir = f"visibility_results/angle_phi_{beta1:03f}_angle_theta_{beta2:03f}"
+        model_name = os.path.splitext(os.path.basename(cfg.MODEL_PATH))[0]
+        output_dir = f"visibility_results/{model_name}/angle_phi_{beta1:03f}_angle_theta_{beta2:03f}"
         os.makedirs(output_dir, exist_ok=True)
         output_file = os.path.join(output_dir, f"visibility_analysis_angle_{theta:03f}.txt")
         
         stats.print_summary(output_file)
-        # Visualizer.export_ply(mesh, visibility_mask, output_dir, f"visibility_mesh_{theta:03f}.ply", ishow=True)
+        Visualizer.export_ply(mesh, visibility_mask, output_dir, f"visibility_mesh_{theta:03f}.ply", ishow=True)
         # Visualizer.plot_visibility_results(
-        #     patch_positions, visibility_mask, camera_pos, isshow=False,
+        #     patch_positions, visibility_mask, camera_pos, ishow=False,
         #     save_path=os.path.join(output_dir, f"visibility_plot_angle_{theta:03d}.png")
         # )
 

@@ -1,14 +1,14 @@
 class VisibilityConfig:
     # 模型路径
-    MODEL_PATH = "model\\bennu_lp.obj"
-    
+    MODEL_PATH = "model\\itokawa_f12288.obj"
+
     START_ANGLE = 0
     END_ANGLE = 360
     ANGLE_STEP = 10
 
     # 相机参数
-    CAMERA_theta_ANGLE = 0.0
-    CAMERA_phi_ANGLE = 0.0
+    CAMERA_theta_ANGLE = -60.0
+    CAMERA_phi_ANGLE = 90.0
    
     CAMERA_DISTANCE = 600.0
 
@@ -17,7 +17,7 @@ class VisibilityConfig:
     FOV_Y_DEG = 2.0
 
     # sun prameters
-    SUN_theta_ANGLE = 0.0
+    SUN_theta_ANGLE = 90.0
     SUN_phi_ANGLE = 0.0
     
     #restrictions
@@ -31,7 +31,3 @@ class VisibilityConfig:
     # 输出控制
     SAVE_INDIVIDUAL_PLY = False  # 是否保存每个角度的PLY
     SAVE_PLOTS = False  # 是否保存可视化图片
-
-    MAX_VIEWING_ANGLE_DEG = 60.0
-    MAX_SUN_ANGLE_DEG = 90.0
-    MAX_REFLECTION_ANGLE_DEG = 100.0
